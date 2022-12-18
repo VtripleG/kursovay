@@ -53,7 +53,9 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 void MainWindow::read_file()
 {
     double buff;
-    std::ifstream read ("D:\\c++\\qt prolects\\kursovay\\kursovay\\data.txt");
+    //std::ifstream read ("D:\\c++\\qt prolects\\kursovay\\kursovay\\data.txt");
+    std::ifstream read ("..\\kursovay\\data.txt");
+
     while (!read.eof())
     {
         read >> buff;
@@ -65,7 +67,8 @@ void MainWindow::read_file()
 void MainWindow::write_file()
 {
     std::ofstream write;
-    write.open("D:\\c++\\qt prolects\\kursovay\\kursovay\\data.txt");
+   // write.open("D:\\c++\\qt prolects\\kursovay\\kursovay\\data.txt");
+    write.open("..\\kursovay\\data.txt");
     for (int i = 0; i < this->values.size(); i++)
     {
         write << this->values[i] << std::endl;
@@ -135,7 +138,7 @@ void MainWindow::paintEvent(QPaintEvent*)
     pen.setColor(QColor(100, 10, 10));
     painter.setPen(pen);
     for (int j = 0; j < values.size(); j++)
-        painter.drawLine(this->start_point.x()+j*step_x, this->start_point.y(), this->start_point.x()+j*step_x, this->start_point.y() + this->values[j]*step_y );
+        painter.drawLine(this->start_point.x()+j*step_x, this->start_point.y(), this->start_point.x()+j*step_x, this->start_point.y() - this->values[j]*step_y );
 
 
 //отрисовка точке
@@ -144,7 +147,7 @@ painter.setPen(Qt::NoPen);
 for (int j = 0; j < values.size(); j++)
 {
     ellipse_center.setX(this->start_point.x()+j*step_x);
-    ellipse_center.setY(this->start_point.y() + this->values[j]*step_y);
+    ellipse_center.setY(this->start_point.y() - this->values[j]*step_y);
     painter.drawEllipse(ellipse_center, 6, 6);
     for(int z = 0; z < this->control_points.size(); z++)
     {
